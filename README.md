@@ -12,3 +12,7 @@ https://user-images.githubusercontent.com/43006719/150667262-21c640c3-22c2-490d-
 # Mobile
 
 https://user-images.githubusercontent.com/43006719/150667985-2171fc1a-5cc5-4de5-b12b-df295f1993da.mov
+
+
+# Assets
+"The Great Drawing Room", "The Billiards Room", "The Morning Room" by The Hallwyl Museum (Hallwylska museet) is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/)
