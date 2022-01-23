@@ -1,7 +1,7 @@
 # AetheNY_webVR
 Virtual Tour Prototype
 
-https://saetbyeolkwon.github.io/AetheNY_webVR/
+https://saetbyeolkwon.github.io/AetherNY_webVR/
 
 # Web
 
