@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AetherNY - WebVR</title>
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="js/index/info-message.js"></script>
+    <script src="js/index/highlight.js"></script>
+    <script src="js/index/3d-info-panel.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/omr6ogt.css">
+    <script>
+      console.log('"The Great Drawing Room" (https://skfb.ly/6ypJL) by The Hallwyl Museum (Hallwylska museet) is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).');
+    </script>
+    <style>
+      .logo{position: absolute; top: 22px; left: 22px; color: rgb(51, 51, 51); padding: 10px 15px 0 15px; width:200px; z-index: 9999;}
+    </style>
+    
+  </head>
+  
+  <body>
+
+    <a href= "http://www.aetherny.com"><img class = "logo" src = "assets/AetherLogo.png"></a>
+
+    <a-scene
+      background="color: #ffffff"
+      cursor="rayOrigin: mouse; fuse: false"
+      raycaster="objects: .raycastable, [link]"
+      info-message="htmlSrc: #messageText">
+
+    <a-entity id = "background" gltf-model="#room" scale = "10 10 10" position = "0 -30 0" class = "raycastable"></a-entity>
+    
+    <!-- camera if I set the camera, position WASD doens't work anymore. -->
+    <a-entity id="rig" rotation = "0 40 0">
+        <a-entity id="camera" camera look-controls>
+
+        <!--info panel-->
+        <a-entity
+        id="infoPanel"
+        position="0 0 -0.1"
+        3d-info-panel
+        visible="false"
+        scale="0.001 0.001 0.001"
+        geometry="primitive: plane; width: 1.5; height: 2.2"
+        material="color: #333333; shader: flat; transparent: false" class="raycastable">
+        <a-entity id="walldeco" mixin="artpiece" material="src: #amerrycompany_img" visible="false"></a-entity>
+        <a-entity id="carpet" mixin="artpiece" material="src: #musicalcontest_img" visible="false"></a-entity>
+        <a-entity id="dish" mixin="artpiece" material="src: #themerryfamily_img" visible="false"></a-entity>
+        <a-entity id="artTitle"
+          position="-0.68 -0.16 0"
+          text="shader: msdf; anchor: left; width: 1.5; font: https://cdn.aframe.io/examples/ui/Viga-Regular.json; color: white; value: Title"></a-entity>
+        <a-entity id="artDescription"
+          position="-0.68 -0.38 0"
+          scale = "1.4 1.4 1"
+          text="baseline: top; wrapCount: 40; shader: msdf; anchor: left; font: https://cdn.aframe.io/examples/ui/Viga-Regular.json; color: white; value: Description"></a-entity>
+        </a-entity>
+      </a-entity>
+    </a-entity>
+
+    <a-assets>
+      <a-asset-item id="messageText" src="description.html"></a-asset-item>
+      <a-asset-item id="room" src="assets/The Great Drawing Room/scene.gltf"></a-asset-item>
+
+      <img id="buttonThumbnail" src="assets/direction.png">
+      <img id="radioButton_img" src="assets/radioButton.png">
+
+      <img id="musicalcontest_img" src="assets/The Musical Contest between Apollo and Marsyas.jpeg">
+      <img id="amerrycompany_img" src="assets/a-merry-company.jpeg">
+      <img id="themerryfamily_img" src="assets/the-merry-family.jpeg">
+
+       <a-mixin
+        id="radioButton"
+        geometry="primitive: plane; width: 0.544768; height: 0.786432"
+        material="color: white; shader: flat"
+        material="shader: flat"
+        position="0 0 0.005"
+       ></a-mixin>
+       <a-mixin
+        id="artpiece"
+        geometry="primitive: plane; width: 1.5; height: 1"
+        material="src: #amerrycompany_img; shader: flat; transparent: true"
+        position="0 0.6 0.002"
+       ></a-mixin>
+
+    </a-assets>
+
+    <!---fade--->
+    <!-- <a-entity
+      id="fadeBackground"
+      geometry="primitive: sphere; radius: 10"
+      material="color: black; side: back; shader: flat; transparent: true; opacity: 0" visible="false">
+    </a-entity> -->
+
+    <!---VR--->
+    <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: .raycastable"></a-entity>
+    <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: .raycastable" line="color: #118A7E"></a-entity>
+
+    <a-entity id="ui" position="0 1 -2.5">
+      <!-- menu -->
+      <a-entity id="menu" highlight>
+        <a-entity id="merryFamilyButton" position="-1.4 0 1" rotation = "0 45 0" material="src: #radioButton_img; shader: flat; side: double; transparent:  true;" geometry = "primitive: circle" scale = "0.08 0.08" mixin = "radioButton" class = "raycastable menu-button"></a-entity>
+
+        <a-entity id="musicalContestButton" position="-2.8 0 5" rotation = "0 -60 180" material="src: #radioButton_img; shader: flat; side: double; transparent:  true;" geometry = "primitive: circle" scale = "0.08 0.08" mixin="radioButton" class = "raycastable menu-button"></a-entity>
+
+        <a-entity id="merryCompanyButton" position="3 -0.2 0" rotation = "0 -45 0" material="src: #radioButton_img; shader: flat; side: double; transparent:  true;" geometry = "primitive: circle" scale = "0.08 0.08" mixin="radioButton" class = "raycastable menu-button"></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- <a-link href="360image02.html" position = "-24 12 44" rotation = "180 160 0" scale = "3 3" geometry = "primitive: circle" material = "shader: flat; side: double; src: #buttonThumbnail; transparent:  true;" link= "visualAspectEnabled: false;"></a-link> -->
+
+    <a-link href="theMorningRoom.html" position = "32 0 -95" rotation = "0 -140 0" scale = "15 15" geometry = "primitive: plane" material = "shader: flat; side: double; src: #buttonThumbnail; transparent:  true;" link= "visualAspectEnabled: false;">
+      <a-text value="The Morning Room" align="center" anchor="center" width="8" position="0 -0.7 0" rotation="0 -140 0"></a-text>
+    </a-link>
+    <a-link href="theBilliardsRoom.html" position = "-94 0 10" rotation = "0 45 0" scale = "15 15" geometry = "primitive: plane" material = "shader: flat; side: double; src: #buttonThumbnail; transparent:  true;" link= "visualAspectEnabled: false;">
+      <a-text value="The Billiards Room" align="center" anchor="center" width="8" position="0 -0.7 0" rotation="0 45 0"></a-text>
+    </a-link>
+        
+    </a-scene>
+  </body>
+</html>

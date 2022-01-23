@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AetherNY - webVR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="js/index/info-message.js"></script>
+    <script>
+      console.log('"The Morning Room" (https://skfb.ly/6ypJL) by The Hallwyl Museum (Hallwylska museet) is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).');
+    </script>
+    <style>
+      .logo{position: absolute; top: 22px; left: 22px; color: rgb(51, 51, 51); padding: 10px 15px 0 15px; width:200px; z-index: 9999;}
+    </style>
+  </head>
+  
+  <body>
+
+    <a href= "http://www.aetherny.com"><img class = "logo" src = "assets/AetherLogo.png"></a>
+    
+    <a-scene
+    raycaster="far: 100; objects: [link];"
+    cursor="rayOrigin: mouse"
+    camera-position
+    environment
+    info-message="htmlSrc: #messageText">
+
+    <!-- camera -->
+    <a-entity id="rig" rotation = "0 -90 0">
+        <a-entity id="camera" camera look-controls></a-entity>
+        </a-entity>
+  
+      <a-assets>
+        <a-asset-item id="messageText" src="description.html"></a-asset-item>
+        <a-asset-item id="room" src="assets/The Morning Room/scene.gltf"></a-asset-item>
+        <img id="buttonThumbnail" src="assets/direction.png">
+      </a-assets>
+
+      <a-entity gltf-model="#room" scale = "10 10 10" position = "15 -10 5"></a-entity>
+      <a-link href="index.html" position = "-8 0 11" rotation = "0 15 0" scale = "3 3" geometry = "primitive: plane" material = "shader: flat; side: double; src: #buttonThumbnail; transparent:  true;" link= "visualAspectEnabled: false;">
+        <a-text value="The Great Drawing Room" align="center" anchor="center" width="5" position="0 -0.7 0" rotation="0 180 0"></a-text>
+      </a-link>
+    </a-scene>
+  </body>
+</html>
